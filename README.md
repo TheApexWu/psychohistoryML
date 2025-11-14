@@ -25,21 +25,21 @@ Inspired by Isaac Asimov's Foundation series, this project uses the Seshat Globa
 - Extracted 3 components explaining 95% of variance
 - Validates Turchin et al. (2017) "social complexity" axis
 
-**Notebook 02: Regression Analysis** ([`02_social_complexity_modeling_FINAL.ipynb`](notebooks/02_social_complexity_modeling_FINAL.ipynb))
+**Notebook 02: Regression Analysis** ([`02_social_complexity_modeling_FINAL.ipynb`](notebooks/02_social_complexity_modeling.ipynb))
 - Predicting polity duration from complexity metrics
 - Result: R² = 0.149 (weak but significant negative correlation)
 - **Finding**: Higher complexity → shorter duration (counterintuitive!)
 
-**Notebook 03: Collapse Prediction** ([`03_collapse_prediction_FINAL.ipynb`](notebooks/03_collapse_prediction_FINAL.ipynb))
+**Notebook 03: Collapse Prediction** ([`03_collapse_prediction_FINAL.ipynb`](notebooks/03_collapse_prediction.ipynb))
 - Binary classification: collapse (below median duration) vs survival
 - Models: Logistic Regression, Random Forest, XGBoost
 - Result: **AUC = 0.854** using Random Forest/XGBoost
 - **Finding**: Non-linear effects (PC1²) are most important predictor
 
 **Research Report** ([`RESEARCH_REPORT.md`](reports/RESEARCH_REPORT.md))
-- Comprehensive write-up answering all research questions
+- Comprehensive write-up answering all research questions from notebooks
 - Methods, results, interpretation, limitations
-- College-level natural language (not overly academic)
+- College-level (not overly academic)
 
 ### Coming Soon
 
