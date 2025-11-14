@@ -3,6 +3,9 @@
 
 Inspired by Isaac Asimov's Foundation series, this project uses the Seshat Global History Databank to test whether social complexity patterns can predict which civilizations will collapse versus survive. The results are surprising: high complexity is a risk factor, not a protective one.
 
+
+*"The fall of Empire, gentlemen, is a massive thing, however, and not easily fought. It is dictated by a rising bureaucracy, a receding initiative, a freezing of caste, a damming of curiosity—a hundred other factors."*  
+— Isaac Asimov, *Foundation*
 ---
 
 ## Key Findings
@@ -297,5 +300,3 @@ Particularly interested in:
 
 ---
 
-*"The fall of Empire, gentlemen, is a massive thing, however, and not easily fought. It is dictated by a rising bureaucracy, a receding initiative, a freezing of caste, a damming of curiosity—a hundred other factors."*  
-— Isaac Asimov, *Foundation*
