@@ -1,0 +1,17 @@
+Metric,2017 Seshat,2022 Equinox,Change
+Sample Size (polities),114,256,+142 (+125%)
+Data Coverage,459 total polities,373 total polities,---
+---,---,---,---
+PCA: PC1 Variance Explained,~76%,74.7%,-1.300
+PCA: Total Variance (3 PCs),~95%,94.2%,-0.800
+---,---,---,---
+Regression: R² (PC1 only),0.149,0.211,+0.062
+Regression: R² (All PCs),0.150,0.234,+0.084
+Regression: PC1 Coefficient,−51.3 yr/unit,+826.5 yr/unit,---
+Interpretation,Higher complexity → Shorter duration,Higher complexity → Longer duration,---
+---,---,---,---
+Classification: AUC (Logistic),0.746,0.709,-0.037
+Classification: AUC (Random Forest),0.838,0.714,-0.124
+Classification: AUC (XGBoost),0.854,0.705,-0.149
+Top Predictor,PC1²,PC1_hier,---
+PC1² Importance (RF),24.3%,16.3%,-8.000
