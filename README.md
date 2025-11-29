@@ -90,10 +90,10 @@ The complexity-instability relationship is **historically bounded**:
 
 | Variable | Range | Meaning |
 |----------|-------|---------|
-| Settlement Hierarchy | 1-6 | Levels of urban organization |
-| Administrative Levels | 1-8 | Bureaucratic depth |
-| Religious Levels | 1-5 | Religious hierarchy |
-| Military Levels | 1-6 | Command structure depth |
+| Settlement Hierarchy | 0-7 | Levels of urban organization |
+| Administrative Levels | 0-9 | Bureaucratic depth |
+| Religious Levels | 0-10 | Religious hierarchy |
+| Military Levels | 0-12 | Command structure depth |
 
 PC1 captures ~70% of variance → "general complexity"
 
