@@ -1,258 +1,203 @@
 # PsychohistoryML
-**Can machine learning predict civilizational collapse? I trained models on 10,000 years of history to find out.**
 
-Inspired by Isaac Asimov's Foundation series, this project uses the Seshat Global History Databank to test whether social complexity patterns can predict which civilizations will collapse versus survive. The results are surprising: high complexity is a risk factor, not a protective one.
+**Testing whether Asimov's fictional "psychohistory" has any basis in reality—using 10,000 years of historical data.**
 
+This project uses the Seshat Global History Databank to analyze patterns in civilizational stability. The core finding: social complexity correlates with *shorter* duration, not longer—but this relationship is historically bounded and requires context to interpret properly.
 
 *"The fall of Empire, gentlemen, is a massive thing, however, and not easily fought. It is dictated by a rising bureaucracy, a receding initiative, a freezing of caste, a damming of curiosity—a hundred other factors."*  
 — Isaac Asimov, *Foundation*
----
-
-## Key Findings
-
-- **Classification works**: 85% accuracy (AUC = 0.854) identifying collapse-prone civilizations
-- **Regression doesn't**: Only 15% of duration variance explained by complexity (R² = 0.149)
-- **Non-linearity dominates**: Complexity squared is the strongest predictor - suggesting tipping points
-- **The paradox**: More sophisticated societies tend to be more fragile, not more resilient
-
-**Interpretation**: We can identify *risk factors* (like medical diagnostics) but can't predict *exact outcomes* (like lottery numbers). History is patterned but not deterministic.
 
 ---
 
-## What's Inside (so far)
+## Project Status
 
-### Completed Analyses
+| Phase | Description | Status |
+|-------|-------------|--------|
+| 1 | 2017 Dataset Analysis | Complete |
+| 2 | Equinox 2022 Replication |  In Progress |
+| 3 | Warfare & Religion Analysis |  Planned |
+| 4 | Interactive Explorer |  Planned |
 
-**Notebook 01: Data Exploration** ([`01_social_complexity_exploration.ipynb`](notebooks/01_social_complexity_exploration.ipynb))
-- PCA on hierarchical complexity variables (settlement, administrative, religious, military levels)
-- Extracted 3 components explaining 95% of variance
-- Validates Turchin et al. (2017) "social complexity" axis
+---
 
-**Notebook 02: Regression Analysis** ([`02_social_complexity_modeling.ipynb`](notebooks/02_social_complexity_modeling.ipynb))
-- Predicting polity duration from complexity metrics
-- Result: R² = 0.149 (weak but significant negative correlation)
-- **Finding**: Higher complexity → shorter duration (counterintuitive!)
+## Current Findings
 
-**Notebook 03: Collapse Prediction** ([`03_collapse_prediction.ipynb`](notebooks/03_collapse_prediction.ipynb))
-- Binary classification: collapse (below median duration) vs survival
-- Models: Logistic Regression, Random Forest, XGBoost
-- Result: **AUC = 0.854** using Random Forest/XGBoost
-- **Finding**: Non-linear effects (PC1²) are most important predictor
+### Phase 1: 2017 Dataset (n=114 polities)
 
-**Research Report** ([`RESEARCH_REPORT.md`](reports/RESEARCH_REPORT.md))
-- Comprehensive write-up answering all research questions from notebooks
-- Methods, results, interpretation, limitations
-- College-level (not overly academic)
+| Task | Model | Metric | Result |
+|------|-------|--------|--------|
+| Predict duration | Linear Regression | R² | 0.149 |
+| Classify instability | Random Forest | ROC-AUC | 0.777 |
+| Classify instability | XGBoost | ROC-AUC | **0.848** |
 
-### Coming Soon
+**Key insight**: Classification works much better than regression. We can identify *risk profiles* (like medical diagnostics) but can't predict *exact duration* (too much noise, contingency, missing variables).
 
-- **Equinox 2022 Dataset Migration**: 47K rows with warfare and religion data
-- **Interactive Simulator**: Streamlit app for exploring collapse risk
-- **Survival Analysis**: Time-to-event modeling with Cox proportional hazards
-- **Warfare Predictions**: Can we predict when polities go to war?
+### Phase 2: Equinox 2022 Dataset (n=256 polities)
+
+The complexity-instability relationship is **historically bounded**:
+
+| Era | N | β (complexity→duration) | R² | Interpretation |
+|-----|---|-------------------------|-----|----------------|
+| Ancient (pre-500 BCE) | 77 | -159 | 0.212 | **Strong negative** |
+| Classical (500 BCE-500 CE) | 44 | -20 | 0.069 | Weak |
+| Medieval (500-1500 CE) | 92 | -11 | 0.027 | No relationship |
+| Early Modern (1500+ CE) | 43 | +6 | 0.035 | **Reversed** |
+
+**What this means**: The "complexity curse" isn't universal—it's strongest in ancient state formation and weakens (or reverses) in later periods. Institutional innovations, military technology, and religious developments likely changed the dynamics.
+
+---
+
+## Notebooks
+
+### Completed
+
+| # | Notebook | Dataset | Purpose |
+|---|----------|---------|---------|
+| 01 | `01_social_complexity_exploration.ipynb` | 2017 | PCA on hierarchy variables, validate Turchin methodology |
+| 02 | `02_social_complexity_modeling.ipynb` | 2017 | Regression: complexity → duration (R²=0.15) |
+| 03 | `03_instability_prediction.ipynb` | 2017 | Classification: XGBoost AUC=0.848 |
+| 04 | `04_equinox_replication.ipynb` | Equinox 2022 | Replicate with larger dataset, diagnose performance |
+| 04b | `04b_era_regional_diagnostics.ipynb` | Equinox 2022 | Era stratification, identify where complexity fails |
+
+### Planned
+
+| # | Notebook | Purpose |
+|---|----------|---------|
+| 05 | `05_warfare_analysis.ipynb` | Add warfare variables, test era×warfare interactions |
+| 06 | `06_religion_analysis.ipynb` | Add religion variables, test stabilizing effects |
+| 07 | `07_final_model.ipynb` | Ensemble model with full feature set |
+
+### Future Deliverables
+
+| # | Deliverable | Purpose |
+|---|-------------|---------|
+| — | Interactive Explorer | Streamlit app: adjust variables, see risk predictions |
+| — | Ablation Dashboard | Which features matter? Toggle on/off, watch AUC change |
+| — | "Which Polity Are You?" | Similarity finder for historical comparisons |
 
 ---
 
 ## Methodology
 
-**Data Source**: [Seshat Global History Databank](https://seshatdatabank.info/) (2017 release)
-- 28,175 data points across 459 historical polities
-- Systematic coding of social complexity variables
-- Timeline: ~3000 BCE to 1800 CE
+### Data Source
 
-**Sample**: After filtering, 114 polities with both complexity data and reliable timelines
+**Seshat Global History Databank** ([seshatdatabank.info](https://seshatdatabank.info/))
+- 2017 release: 114 polities after filtering
+- Equinox 2022 release: 256 polities with warfare and religion variables
+- Timeline: ~10,000 BCE to 1900 CE
 
-**Complexity Metrics** (from Seshat):
-1. Settlement Hierarchy (1-10): levels of urban organization
-2. Administrative Levels (1-10): bureaucratic depth
-3. Religious Levels (1-10): religious hierarchy
-4. Military Levels (1-10): command structure depth
+### Complexity Metrics (PCA on 4 variables)
 
-**Analytical Approach**:
-1. PCA to extract underlying complexity dimensions
-2. Regression to test complexity-duration relationship
-3. Classification to identify collapse-prone profiles
-4. Feature engineering (squared terms, interactions) to capture non-linearity
+| Variable | Range | Meaning |
+|----------|-------|---------|
+| Settlement Hierarchy | 1-6 | Levels of urban organization |
+| Administrative Levels | 1-8 | Bureaucratic depth |
+| Religious Levels | 1-5 | Religious hierarchy |
+| Military Levels | 1-6 | Command structure depth |
+
+PC1 captures ~70% of variance → "general complexity"
+
+### Target Variable
+
+**Instability** = Duration below 33rd percentile (~146 years)
+
+We use "instability" rather than "collapse" because Seshat records when polities ended, not *how*—could be violent collapse, peaceful transition, or absorption.
+
+### Modeling Approach
+
+1. **Baseline**: Logistic regression on PC1-3
+2. **Non-linear**: Add PC1², PC1×PC2 interaction terms
+3. **Tree models**: Random Forest, XGBoost with class balancing
+4. **Stratification**: Era-specific analysis where relationships differ
 
 ---
 
-## Results Summary
+## Honest Limitations
 
-### Model Performance
+### Sample Size
+114-256 polities is small for ML. High variance, wide confidence intervals, can't detect subtle effects reliably.
 
-| Model | Task | Metric | Score |
-|-------|------|--------|-------|
-| Linear Regression | Predict duration | R² | 0.149 |
-| Random Forest | Classify collapse | ROC-AUC | 0.838 |
-| XGBoost | Classify collapse | ROC-AUC | **0.854** |
+### Selection Bias
+Seshat overrepresents literate, urban, large polities. Complex societies leave better archaeological records—we may detect their endings better than simple societies'.
 
-### Feature Importance (Collapse Prediction)
+### Temporal Correlation
+Civilizations influence each other (Rome → Byzantium). Random train/test splits may leak information. Era-stratified cross-validation would be more rigorous.
 
-1. **PC1² (24.3%)** - Non-linear complexity effect
-2. **PC1 (24.1%)** - General complexity level
-3. **PC1 × PC2 (18.4%)** - Interaction: complexity × religious specialization
+### Causality
+Correlation ≠ causation. Does complexity cause instability? Or does impending crisis cause complexity (defensive bureaucratization)? Or common causes?
 
-**What this means**: The relationship isn't linear. There's a "Goldilocks zone" - some complexity helps, but very high complexity becomes a vulnerability.
+### Missing Variables
+Climate, economics, leadership quality, geography, contingency—all absent from current models.
 
-### Why the Paradox?
+---
 
-**Low R² (regression) + High AUC (classification)**
+## What This Is (and Isn't)
 
-- Can't predict *exact* duration well (too much noise, contingency)
-- Can predict *risk category* well (structural patterns exist)
-- Like weather: can forecast "hotter than average" better than exact temperature
+**IS:**
+- Exploration of whether ML can detect historical patterns
+- Replication/extension of Turchin et al.'s cliodynamics work
+- Open-source learning project with honest methodology
+
+**IS NOT:**
+- A claim to have "built psychohistory"
+- Predictive model for contemporary societies
+- Substitute for historical expertise
+
 
 ---
 
 ## Getting Started
 
-### Prerequisites
 ```bash
-pip install pandas numpy scikit-learn xgboost matplotlib seaborn jupyter
-```
-
-### Run the Analysis
-```bash
-git clone https://github.com/yourusername/psychohistory-ml.git
+# Clone
+git clone https://github.com/TheApexWu/psychohistory-ml.git
 cd psychohistory-ml
+
+# Install dependencies
+pip install pandas numpy scikit-learn xgboost matplotlib seaborn jupyter
+
+# Run notebooks
 jupyter notebook notebooks/
 ```
 
-Start with `01_social_complexity_exploration.ipynb` and progress through the sequence.
-
-### Data
-The Seshat dataset is included in `data/` under CC BY-NC-SA 4.0 license (research use only).
+Start with `01_social_complexity_exploration.ipynb` and progress sequentially.
 
 ---
 
 ## Key Insights
 
-### 1. Complexity as Vulnerability
-Higher social complexity (more hierarchical layers, more specialization) correlates with *shorter* duration, not longer. Possible explanations:
-- Coordination costs grow super-linearly
-- More interdependencies → cascading failures
-- Rigidity prevents adaptation to shocks
-- Elite extraction provokes instability
+### 1. Complexity is Context-Dependent
+The "complexity curse" only appears in ancient polities (R²=0.21). Medieval and early modern societies show no relationship—suggesting institutional innovations buffered complexity costs.
 
-### 2. Non-Linear Dynamics
-The squared term (PC1²) being the strongest predictor suggests *threshold effects*:
-- Below threshold: Complexity helps (enables scale)
-- Above threshold: Complexity hurts (creates fragility)
-- Not a smooth relationship but a tipping point
+### 2. Non-Linear Effects Matter
+PC1² (complexity squared) is consistently important. There may be a "Goldilocks zone" where moderate complexity helps but excessive complexity creates fragility.
 
-### 3. Predictability Limits
-Only 15% of duration variance is explainable from complexity metrics. The other 85%:
-- Warfare (not in 2017 dataset)
-- Climate shocks
-- Economic factors
-- Leadership quality
-- Pure randomness
+### 3. Classification > Regression
+Binary outcomes (stable/unstable) are far more predictable than continuous duration. We can identify risk factors without predicting exact outcomes—like medicine, not astrology.
 
-This sets realistic expectations: We can identify risk factors but can't perfectly predict history.
-
-### 4. Classification > Regression
-Binary outcomes (collapse vs survival) are much more predictable than continuous ones (exact duration). This is common in complex systems near critical points.
+### 4. Era Stratification is Essential
+Pooling all eras obscures real heterogeneity. Era-specific models or era×feature interactions are needed.
 
 ---
 
-## Background
+## Academic Context
 
-### Inspiration: Asimov's Psychohistory
-In Isaac Asimov's *Foundation* series, "psychohistory" is a fictional science combining history, sociology, and statistics to predict the future of large populations. While Asimov's version required quadrillions of people and perfect knowledge, modern data science + historical databases let us test whether any version of this is possible.
-
-**Verdict**: Sort of! We can identify structural risk factors (like identifying heart attack risk) but can't predict exact timelines (like predicting exact day of heart attack).
-
-### Academic Context
-This work builds on:
-- **Peter Turchin et al. (2017)**: Seshat database and social complexity measurement
-- **Joseph Tainter (1988)**: *The Collapse of Complex Societies*
-- **Jared Diamond (2005)**: *Collapse: How Societies Choose to Fail or Succeed*
-
-Unlike those works, this takes a pure machine learning approach: let the algorithms find patterns without imposing theoretical priors.
+Builds on:
+- **Peter Turchin et al.**: Seshat database, cliodynamics
+- **Joseph Tainter**: *The Collapse of Complex Societies* (1988)
+- **Oswald Spengler**: Cyclical theories of civilization
+- **Jack Goldstone**: Demographic-structural theory
 
 ---
-
-## Visualizations
-
-All notebooks generate publication-quality figures:
-- Correlation matrices
-- PCA biplots
-- Regression diagnostics
-- ROC curves with confidence intervals
-- Confusion matrices
-- Feature importance plots
-- Calibration curves
-- Risk spectra
-
-See `figures/` directory for outputs.
-
----
-
-## Limitations
-
-**Sample Size**: 114 polities (23 test cases) is small for ML
-- High variance across folds
-- Can't detect subtle effects
-- Confidence intervals are wide
-
-**Selection Bias**: Seshat overrepresents:
-- Literate societies (better documentation)
-- Urban societies (more archaeological visibility)
-- Large polities (empires over chiefdoms)
-
-**Static Snapshots**: We treat each polity as one observation, missing:
-- Complexity trajectories over time
-- Early warning signals
-- Dynamic adaptation patterns
-
-**Missing Variables**: 
-- Warfare frequency/intensity (coming in Equinox 2022)
-- Climate data
-- Economic metrics
-- Leadership quality
-
-**Causality**: Correlation ≠ causation (duh!)
-- Does complexity cause collapse?
-- Or does impending collapse cause complexity (desperate adaptation)?
-- Or do both have common causes?
-
----
-
-## Tech Stack (so far)
-
-- **Python 3.10+**
-- **Data**: pandas, numpy
-- **ML**: scikit-learn, xgboost
-- **Viz**: matplotlib, seaborn
-- **Stats**: statsmodels, scipy
-- **Notebooks**: Jupyter
-
----
-
 
 ## Citation
 
-If you use this work, please cite:
-
 ```bibtex
 @misc{psychohistoryml2025,
-  author = {[Your Name]},
-  title = {PsychohistoryML: Predicting Civilizational Collapse Using Machine Learning},
+  author = {Amadeus Wu},
+  title = {PsychohistoryML: Analyzing Civilizational Stability with Machine Learning},
   year = {2025},
-  publisher = {GitHub},
   url = {https://github.com/TheApexWu/psychohistory-ml}
-}
-```
-
-**Data Source**:
-```bibtex
-@article{turchin2017seshat,
-  title={Seshat: The global history databank},
-  author={Turchin, Peter and others},
-  journal={Cliodynamics},
-  volume={6},
-  number={1},
-  year={2015}
 }
 ```
 
@@ -260,35 +205,8 @@ If you use this work, please cite:
 
 ## License
 
-**Code**: MIT License (see [LICENSE](LICENSE))
-
-**Data**: Seshat dataset is CC BY-NC-SA 4.0 (research use only, no commercial use)
-
-**Papers/Reports**: CC BY 4.0 (attribute and share alike)
-
----
-
-## Contributing
-
-This is a personal research project but feedback welcome! 
-
-- **Found a bug?** Open an issue
-- **Have a suggestion?** Start a discussion
-- **Want to collaborate?** Reach out at [your email/twitter]
-
-Particularly interested in:
-- Alternative modeling approaches
-- Additional historical datasets to cross-validate
-- Causal inference methodologies
-- Survival analysis experts
-
----
-
-## Acknowledgments
-
-- **Seshat Project**: For creating and maintaining this incredible database
-- **Peter Turchin & team**: For pioneering quantitative history
-- **Isaac Asimov**: For inspiring generations with psychohistory
+- **Code**: MIT License
+- **Data**: Seshat CC BY-NC-SA 4.0 (research use only)
 
 ---
 
@@ -296,7 +214,8 @@ Particularly interested in:
 
 - GitHub: [@TheApexWu](https://github.com/TheApexWu)
 - Twitter: [@AmadeusWoo](https://twitter.com/AmadeusWoo)
-- Email: amadeuswoo@proton.me
+- Substack: [amadeuswu.substack.com](https://amadeuswu.substack.com)
 
 ---
 
+*"Seldon knew that his psychohistory could predict only probabilities, and not certainties."* — Asimov
