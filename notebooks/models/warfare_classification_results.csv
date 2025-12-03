@@ -1,4 +1,4 @@
 Model,AUC,Features
 Notebook 04 (Complexity),0.67,"PC1, PC2, PC3, PC1², PC1×PC2"
-Notebook 05 Baseline,0.7130177514792899,"PC1_hier, PC2_hier, PC3_hier, PC1_squared, PC1_x_PC2"
-Notebook 05 with Warfare,0.7218934911242604,"PC1_hier, PC2_hier, PC3_hier, PC1_squared, PC1_x_PC2, ..."
+Notebook 05 Baseline,0.5050420168067227,"PC1_hier, PC2_hier, PC3_hier, PC1_squared, PC1_x_PC2"
+Notebook 05 with Warfare,0.6478991596638655,"PC1_hier, PC2_hier, PC3_hier, PC1_squared, PC1_x_PC2, ..."

@@ -1,0 +1,112 @@
+{
+  "version": "1.0.0",
+  "created": "2025-12-03 15:16:38",
+  "project": "PsychohistoryML - Three Mechanism Model",
+  "dataset": {
+    "name": "Seshat Equinox 2022 + Warfare + Religion",
+    "n_polities": 256,
+    "n_features": 16,
+    "features": [
+      "PC1_hier",
+      "PC2_hier",
+      "PC3_hier",
+      "PC1_squared",
+      "PC1_x_PC2",
+      "total_warfare_tech",
+      "weapons_count",
+      "armor_count",
+      "cavalry_count",
+      "fortification_count",
+      "material_count",
+      "advanced_tech_count",
+      "moral_score",
+      "legit_score",
+      "ideol_score",
+      "total_rel"
+    ],
+    "target_classification": "instability",
+    "target_regression": "duration_years"
+  },
+  "training": {
+    "train_size": 204,
+    "test_size": 52,
+    "test_split_ratio": 0.2,
+    "random_state": 42,
+    "features_standardized": true
+  },
+  "model_performance": {
+    "best_regressor": {
+      "name": "Random Forest",
+      "test_r2": 0.3561304422474988,
+      "test_mae": 158.33772229303088,
+      "test_rmse": 382.6370287766349
+    },
+    "best_classifier": {
+      "name": "Random Forest",
+      "test_auc": 0.7440828402366864,
+      "test_f1": 0.6792452830188679,
+      "test_accuracy": 0.6730769230769231
+    }
+  },
+  "cross_validation": {
+    "cv_folds": 5,
+    "cv_auc_mean": 0.6753333333333333,
+    "cv_auc_std": 0.09230846444237796,
+    "overfitting_gap": -0.06874950690335302
+  },
+  "mechanism_insights": {
+    "complexity_features": [
+      "PC1_hier",
+      "PC2_hier",
+      "PC3_hier",
+      "PC1_squared",
+      "PC1_x_PC2"
+    ],
+    "warfare_features": [
+      "total_warfare_tech",
+      "weapons_count",
+      "armor_count",
+      "cavalry_count",
+      "fortification_count",
+      "material_count",
+      "advanced_tech_count"
+    ],
+    "religion_features": [
+      "moral_score",
+      "legit_score",
+      "ideol_score",
+      "total_rel"
+    ],
+    "total_mechanisms": 3
+  },
+  "era_performance": [
+    {
+      "Era": "Ancient (pre-500 BCE)",
+      "N": 77,
+      "Instability_Rate": 0.6103896103896104,
+      "AUC": 0.8893617021276595,
+      "R\u00b2": 0.5264339541068996
+    },
+    {
+      "Era": "Classical (500 BCE-500 CE)",
+      "N": 44,
+      "Instability_Rate": 0.3181818181818182,
+      "AUC": 0.9630952380952381,
+      "R\u00b2": 0.2721274186253887
+    },
+    {
+      "Era": "Medieval (500-1500 CE)",
+      "N": 92,
+      "Instability_Rate": 0.45652173913043476,
+      "AUC": 0.9299999999999999,
+      "R\u00b2": 0.6972040811544751
+    },
+    {
+      "Era": "Early Modern (1500+ CE)",
+      "N": 43,
+      "Instability_Rate": 0.5813953488372093,
+      "AUC": 0.9844444444444445,
+      "R\u00b2": 0.3101021262763567
+    }
+  ]
+}
