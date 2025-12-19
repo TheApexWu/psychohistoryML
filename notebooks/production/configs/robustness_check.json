@@ -1,0 +1,9 @@
+{
+  "random_split_mean": 0.6568786982248521,
+  "random_split_std": 0.057480408534459196,
+  "random_split_min": 0.5325443786982249,
+  "random_split_max": 0.7633136094674556,
+  "loeo_mean": 0.5661573407891781,
+  "temporal_gap": 0.090721357435674,
+  "n_seeds": 20
+}

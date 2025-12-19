@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "created": "2025-12-03 15:16:38",
+  "created": "2025-12-19 16:14:15",
   "project": "PsychohistoryML - Three Mechanism Model",
   "dataset": {
     "name": "Seshat Equinox 2022 + Warfare + Religion",
@@ -78,35 +78,5 @@
       "total_rel"
     ],
     "total_mechanisms": 3
-  },
-  "era_performance": [
-    {
-      "Era": "Ancient (pre-500 BCE)",
-      "N": 77,
-      "Instability_Rate": 0.6103896103896104,
-      "AUC": 0.8893617021276595,
-      "R\u00b2": 0.5264339541068996
-    },
-    {
-      "Era": "Classical (500 BCE-500 CE)",
-      "N": 44,
-      "Instability_Rate": 0.3181818181818182,
-      "AUC": 0.9630952380952381,
-      "R\u00b2": 0.2721274186253887
-    },
-    {
-      "Era": "Medieval (500-1500 CE)",
-      "N": 92,
-      "Instability_Rate": 0.45652173913043476,
-      "AUC": 0.9299999999999999,
-      "R\u00b2": 0.6972040811544751
-    },
-    {
-      "Era": "Early Modern (1500+ CE)",
-      "N": 43,
-      "Instability_Rate": 0.5813953488372093,
-      "AUC": 0.9844444444444445,
-      "R\u00b2": 0.3101021262763567
-    }
-  ]
+  }
 }
