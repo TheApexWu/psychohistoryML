@@ -1,0 +1,6 @@
+Model,AUC,Std
+1. Complexity,0.578,0.116
+2. + Warfare,0.543,0.129
+3. + Religion (3-mech),0.545,0.114
+4. + Violence (4-mech),0.512,0.124
+5. Violence only,0.485,0.053

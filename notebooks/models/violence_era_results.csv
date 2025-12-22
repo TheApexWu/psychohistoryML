@@ -1,0 +1,5 @@
+Era,n,internal_score,external_score,atrocity_score,total_violence
+Ancient (pre-500 BCE),69,-0.637,-0.073,-0.635,-0.209
+Classical (500 BCE-500 CE),43,0.107,0.158,-0.031,0.052
+Early Modern (1500+ CE),43,0.048,0.207,0.173,0.249
+Medieval (500-1500 CE),92,0.032,0.076,0.01,0.023
