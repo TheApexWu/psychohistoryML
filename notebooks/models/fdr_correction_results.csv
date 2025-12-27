@@ -1,0 +1,35 @@
+notebook,test,p_value,category,p_fdr,sig_original,sig_fdr
+NB05,PC1_hier baseline,0.077,complexity,0.17453333333333335,False,False
+NB05,total_warfare baseline,0.808,warfare,0.8585,False,False
+NB05,complexity×warfare interaction,0.486,interaction,0.6884999999999999,False,False
+NB06,moral_score effect,0.042,religion,0.119,True,False
+NB06,ideology_score effect,0.039,religion,0.119,True,False
+NB06,total_rel effect,0.0003,religion,0.0014571428571428572,True,True
+NB06,PC1×moral interaction,0.153,interaction,0.2737894736842105,False,False
+NB06,PC1×ideology interaction,0.232,interaction,0.39440000000000003,False,False
+NB09,Cox: PC1_hier,0.077,complexity,0.17453333333333335,False,False
+NB09,Cox: PC2_hier,0.742,complexity,0.8585,False,False
+NB09,Cox: PC3_hier,0.153,complexity,0.2737894736842105,False,False
+NB09,Cox: total_warfare,0.808,warfare,0.8585,False,False
+NB09,Cox: total_rel,3e-07,religion,1.0199999999999999e-05,True,True
+NB09,Ancient: PC1_hier,0.046,era_stratified,0.12030769230769231,True,False
+NB09,Ancient: total_rel,0.086,era_stratified,0.18275,False,False
+NB09,Classical: PC1_hier,0.347,era_stratified,0.5203478260869565,False,False
+NB09,Classical: total_rel,0.31,era_stratified,0.5019047619047619,False,False
+NB09,Medieval: PC1_hier,0.352,era_stratified,0.5203478260869565,False,False
+NB09,Medieval: total_rel,0.042,era_stratified,0.119,True,False
+NB09,Early Modern: PC1_hier,0.971,era_stratified,0.971,False,False
+NB09,Early Modern: total_rel,0.716,era_stratified,0.8585,False,False
+NB09,complexity×warfare Cox,0.0001,interaction,0.0005666666666666667,True,True
+NB09,PC1_squared (nonlinear),0.0001,nonlinear,0.0005666666666666667,True,True
+NB09,Logrank: EM vs Medieval,0.019,era_comparison,0.07177777777777777,True,False
+NB09,Logrank: EM vs Classical,0.012,era_comparison,0.051000000000000004,True,False
+NB09,Logrank: EM vs Ancient,1e-05,era_comparison,8.5e-05,True,True
+NB09,Logrank: Med vs Classical,0.578,era_comparison,0.7860799999999999,False,False
+NB09,Logrank: Med vs Ancient,1e-05,era_comparison,8.5e-05,True,True
+NB09,Logrank: Class vs Ancient,1e-05,era_comparison,8.5e-05,True,True
+NB09,PH test: PC1_hier,0.095,assumption,0.19,False,False
+NB09,PH test: PC2_hier,0.663,assumption,0.834888888888889,False,False
+NB09,PH test: PC3_hier,0.945,assumption,0.971,False,False
+NB09,PH test: total_rel,0.764,assumption,0.8585,False,False
+NB09,PH test: total_warfare,0.608,assumption,0.7950769230769231,False,False

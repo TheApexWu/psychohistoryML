@@ -12,10 +12,13 @@ This project analyzes the Seshat Global History Databank to understand factors a
 ## Project Status: Complete
 
 **Three-Mechanism Model Achieved:**
-- Religion: 27.2% feature importance 
+- Religion: 27.2% feature importance
 - Complexity: 25.8% feature importance
 - Warfare: 19.3% feature importance
-- **Final Performance:** AUC 0.744 (Random Forest)
+- **Cross-Validation:** AUC 0.66 ± 0.06 (Random Forest)
+- **Temporal Holdout (LOEO):** AUC 0.57 (weak temporal generalization)
+
+*Note: This is exploratory analysis, not confirmatory hypothesis testing.*
 
 ---
 
@@ -31,7 +34,7 @@ The complexity-duration relationship varies significantly across historical peri
 - **Early Modern** (1500+ CE): Minimal relationship
 
 ### 3. Realistic Performance Bounds
-AUC 0.744 represents meaningful but appropriately modest predictive power for complex historical phenomena. The model explains ~20% of variance in civilizational outcomes—significant for social science, but far from deterministic prediction.
+AUC ~0.67 (CV mean: 0.66 ± 0.06) represents meaningful but appropriately modest predictive power for complex historical phenomena. Temporal holdout (LOEO AUC = 0.57) shows weak generalization across eras, suggesting era-specific patterns rather than universal laws.
 
 ---
 
@@ -60,11 +63,11 @@ AUC 0.744 represents meaningful but appropriately modest predictive power for co
 | 04 | `04_equinox_replication.ipynb` | Era clustering discovery | Geographic < Temporal patterns |
 | 05 | `05_warfare_integration.ipynb` | Warfare mechanism | AUC 0.505 → 0.601 |
 | 06 | `06_religion_integration.ipynb` | Religion mechanism | AUC 0.601 → 0.606 |
-| 07 | `07_production_deployment.ipynb` | Final model | AUC 0.744, production ready |
+| 07 | `07_production_deployment.ipynb` | Final model | AUC ~0.67, production ready |
 
 ### Production Models
-- **Best Classifier**: Random Forest (AUC = 0.744)
-- **Cross-validation**: 0.675 ± 0.092 (stable performance)
+- **Best Classifier**: Random Forest (CV AUC = 0.66 ± 0.06)
+- **Temporal Holdout**: LOEO AUC = 0.57 (limited era generalization)
 - **Deployment**: Complete pipeline with scaler and predictor class
 
 ---
