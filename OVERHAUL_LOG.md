@@ -78,24 +78,41 @@ Three-agent audit revealed:
 - [x] notebooks/10_fdr_correction.ipynb
 - [x] models/fdr_correction_results.csv
 
-## Phase 3: Reframe Narrative (Pending)
+## Phase 3: Reframe Narrative ✅ COMPLETE
 
-- [ ] "Instability" → "short-duration"
-- [ ] "Predicts" → "associated with"
-- [ ] Add Limitations section
-- [ ] Explain religion contradiction
+### Language Changes:
+- [x] "Instability" → "short-duration" (research/page.js)
+- [x] "Predicts" → "explains" / "associated with" (DiscoveriesSection.jsx)
+- [x] Added FDR context to findings (research/page.js)
+- [x] Updated religion finding (now shows HR=1.58 destabilizing, counterintuitive)
 
-## Phase 4: Website Overhaul (Pending)
+### Chatbot System Prompt Updated:
+- [x] Rule 3 now "EPISTEMIC HUMILITY" instead of "AGONISTIC STANCE"
+- [x] Explicit "EXPLORATORY analysis" framing
+- [x] Lists ROBUST vs EXPLORATORY findings with FDR status
+- [x] Instructs to say "associated with" not "causes/predicts"
 
-- [ ] Update Research page
-- [ ] Add "What This Isn't" section
-- [ ] Update chatbot system prompt
+### Files Updated:
+- research/page.js (terminology caveat, religion findings)
+- DiscoveriesSection.jsx (discovery #1, #4 language)
+- layout.tsx (meta description)
+- api/chat/route.js (system prompt)
 
-## Phase 5: Technical Polish (Pending)
+## Phase 4: Website Overhaul ✅ COMPLETE
 
-- [ ] requirements.txt
-- [ ] Threshold sensitivity analysis
-- [ ] Confidence intervals
+- [x] Update Research page (FDR context, religion findings)
+- [x] Add "What This Isn't" section (4 key disclaimers)
+- [x] Update chatbot system prompt (done in Phase 3)
+- [x] Simplified home page to HN-style portfolio
+- [x] Moved psychohistory content to /discover
+
+## Phase 5: Technical Polish ✅ COMPLETE
+
+- [x] Created requirements.txt with all dependencies
+- [x] Documented threshold sensitivity in README
+- [x] Added statistical rigor section (FDR, CIs)
+- [x] Updated notebooks table (added NB09, NB10)
+- [x] Corrected religion finding (HR=1.58 destabilizing)
 
 ---
 
@@ -123,3 +140,17 @@ Three-agent audit revealed:
 - **Website Simplified**: New HN-style home page created
   - Psychohistory content moved to /discover
   - Home page now personal portfolio style
+- **Phase 3 Complete**: Reframed narrative across website
+  - "Instability" → "short-duration"
+  - "Predicts" → "associated with"
+  - Chatbot now distinguishes ROBUST vs EXPLORATORY findings
+  - Religion finding corrected (HR=1.58 destabilizing, counterintuitive)
+- **Phase 4 Complete**: Added "What This Isn't" section to research page
+  - Not prediction, Not causal inference, Not universal laws, Not definitive
+  - Emphasizes hypothesis generation over confirmation
+- **Phase 5 Complete**: Technical polish
+  - Created requirements.txt
+  - Added Statistical Rigor section to README (FDR, threshold sensitivity, CIs)
+  - Updated notebooks table with NB09, NB10
+
+## OVERHAUL COMPLETE

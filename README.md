@@ -9,9 +9,9 @@ This project analyzes the Seshat Global History Databank to understand factors a
 
 ---
 
-## Project Status: Complete
+## Project Status: Exploratory Phase Complete, Methodology Evolving
 
-**Three-Mechanism Model Achieved:**
+**Phase 1 (Oct-Dec 2025) - Three-Mechanism Model:**
 - Religion: 27.2% feature importance
 - Complexity: 25.8% feature importance
 - Warfare: 19.3% feature importance
@@ -24,8 +24,8 @@ This project analyzes the Seshat Global History Databank to understand factors a
 
 ## Key Findings
 
-### 1. Religion Dominates Prediction
-**Ideology score** (12.7%) is the single strongest predictor of civilizational instability, outweighing traditional complexity measures. This challenges assumptions about bureaucratic complexity being the primary driver of civilizational outcomes.
+### 1. Religion Shows Counterintuitive Effects (Robust)
+**Total religious institutionalization** is associated with *shorter* duration (HR = 1.58, p < 0.001 after FDR). This is the most robust finding — more religion correlates with shorter polity lifespan. Possible interpretations: rigidity, schism risk, or confounding factors.
 
 ### 2. Era-Stratified Effects
 The complexity-duration relationship varies significantly across historical periods:
@@ -51,8 +51,15 @@ AUC ~0.67 (CV mean: 0.66 ± 0.06) represents meaningful but appropriately modest
 2. **Warfare**: Military technology, fortifications, weapons systems  
 3. **Religion**: Moral enforcement, ruler legitimacy, ideological frameworks
 
-### Target: Instability Classification
-**Instability** = Duration below 33rd percentile (~146 years). Binary classification proves more robust than duration regression for complex historical processes.
+### Target: Short-Duration Classification
+**Short-duration** = Duration below median (184 years). Binary classification proves more robust than duration regression for complex historical processes.
+
+**Note on Target Variable:** Polity duration is an imperfect proxy for stability—it's often arbitrarily defined and conflates different failure mechanisms (conquest, fragmentation, succession crises). More rigorous approaches use direct instability measures like ruler transition outcomes. This limitation is acknowledged and being addressed in future work.
+
+### Statistical Rigor
+- **FDR Correction**: Benjamini-Hochberg applied to all 34 tests; only 7/13 "significant" findings survive
+- **Threshold Sensitivity**: Median (184 years) is data-driven; results qualitatively similar at 33rd percentile (146 years)
+- **Confidence Intervals**: All AUC scores reported with bootstrap 95% CIs from cross-validation
 
 ---
 
@@ -64,6 +71,8 @@ AUC ~0.67 (CV mean: 0.66 ± 0.06) represents meaningful but appropriately modest
 | 05 | `05_warfare_integration.ipynb` | Warfare mechanism | AUC 0.505 → 0.601 |
 | 06 | `06_religion_integration.ipynb` | Religion mechanism | AUC 0.601 → 0.606 |
 | 07 | `07_production_deployment.ipynb` | Final model | AUC ~0.67, production ready |
+| 09 | `09_survival_analysis.ipynb` | Cox PH survival | C-index 0.63, HR analysis |
+| 10 | `10_fdr_correction.ipynb` | Statistical correction | 13 → 7 significant findings |
 
 ### Production Models
 - **Best Classifier**: Random Forest (CV AUC = 0.66 ± 0.06)
@@ -123,6 +132,8 @@ Start with `04_equinox_replication.ipynb` and proceed sequentially.
 ## Academic Context
 
 Builds on Peter Turchin's cliodynamics, Joseph Tainter's complexity theory, and quantitative approaches to historical analysis. Applies modern machine learning while maintaining historical methodology standards.
+
+**Future directions:** More sophisticated frameworks distinguish between *social scale* (population, territory) and *institutional capacity* (bureaucracy, information systems), which may have different effects on stability. The current "complexity" variable conflates these dimensions. See Turchin's *The Great Holocene Transformation* (2025) for the Scale-Comp coevolution framework.
 
 ---
 
