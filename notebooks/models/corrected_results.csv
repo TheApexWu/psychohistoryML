@@ -1,0 +1,7 @@
+metric,value,std
+5-fold CV (leaky),0.696,0.029
+5-fold CV (correct),0.698,0.026
+Nested CV (tuned),0.667,0.052
+LOEO,0.537,0.101
+Cox C-index,0.631,
+Weibull C-index,0.63,

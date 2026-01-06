@@ -153,4 +153,94 @@ Three-agent audit revealed:
   - Added Statistical Rigor section to README (FDR, threshold sensitivity, CIs)
   - Updated notebooks table with NB09, NB10
 
+---
+
+## Phase 6: Methodology Fixes ✅ COMPLETE
+
+**Date**: 2026-01-05
+
+### 6.1 Data Leakage Investigation
+
+**Concern**: Early notebooks fit StandardScaler/PCA on full data before cross-validation, potentially inflating AUC estimates.
+
+**Result**: Minimal impact (-0.002 AUC)
+- Leaky approach: 0.696 ± 0.029
+- Pipeline approach: 0.698 ± 0.026
+- Random Forest is robust to scaling leakage (tree splits are invariant to monotonic transforms)
+
+**Takeaway**: Previous AUC estimates were NOT significantly inflated, but pipeline approach is now standard.
+
+### 6.2 Nested Cross-Validation
+
+Implemented proper nested CV for unbiased performance estimation with hyperparameter tuning.
+
+**Results**:
+- Nested CV AUC: 0.667 ± 0.052
+- Best params: max_depth=5, min_samples_split=5, n_estimators=100
+
+### 6.3 Leave-One-Era-Out (LOEO) - Detailed Breakdown
+
+**This is the critical finding:**
+
+| Era Held Out | AUC | Interpretation |
+|--------------|-----|----------------|
+| Ancient (pre-500 BCE) | 0.711 | Model generalizes TO Ancient |
+| Classical (500 BCE-500 CE) | 0.464 | Below chance |
+| Early Modern (1500+ CE) | 0.479 | Below chance |
+| Medieval (500-1500 CE) | 0.496 | Chance level |
+
+**LOEO Mean**: 0.537 ± 0.101
+**CV-LOEO Gap**: +0.13
+
+**Interpretation**: The model learns Ancient-era patterns that completely fail to generalize to later periods. This confirms era-specific patterns, not universal laws.
+
+### 6.4 Advanced Survival Analysis
+
+**Weibull AFT Model** (C-index: 0.630):
+
+| Feature | Coefficient | p-value | Interpretation |
+|---------|-------------|---------|----------------|
+| total_rel (religion) | -0.372 | <0.0005*** | Shorter duration |
+| PC1_hier (complexity) | -0.130 | 0.040* | Shorter duration |
+| total_warfare_tech | -0.046 | 0.444 | Not significant |
+| PC2_hier | +0.015 | 0.720 | Not significant |
+| PC3_hier | -0.056 | 0.183 | Not significant |
+
+**Weibull Shape (rho = 0.478)**: Hazard DECREASES over polity lifetime
+- "Infant mortality" pattern: Early years most dangerous
+- Polities that survive initial period become more stable
+
+**Aalen Additive Model**: Implemented time-varying coefficients to test whether effects change over polity lifetime. Figures saved for visual inspection.
+
+### 6.5 Files Created/Updated
+
+- [x] `notebooks/11_methodology_fixes.ipynb` - Full analysis
+- [x] `models/corrected_results.csv` - Summary metrics
+- [x] `figures/11_aalen_time_varying.png` - Time-varying effects
+- [x] `figures/11_km_by_era_ci.png` - KM curves with confidence intervals
+
+### 6.6 Key Takeaways
+
+1. **Data leakage was NOT a significant issue** - RF robustness saved us
+2. **LOEO gap (+0.13) is the real story** - Model doesn't generalize across eras
+3. **Religion remains the strongest predictor** (survives all corrections)
+4. **Weibull rho < 1** suggests "infant mortality" pattern for polities
+5. **Ancient patterns dominate** - model struggles with later periods
+
+---
+
+## Progress Log (Continued)
+
+### 2026-01-05
+- **Phase 6 Complete**: Methodology fixes implemented
+  - Data leakage: Minimal impact confirmed, pipeline approach now standard
+  - Nested CV: Unbiased AUC = 0.667 ± 0.052
+  - LOEO breakdown: Ancient 0.711, later eras ~0.47-0.50 (chance)
+  - Weibull AFT: Religion -0.372 (p<0.0005), rho=0.478 (infant mortality pattern)
+  - Aalen model: Time-varying coefficients implemented
+- Created notebook 11_methodology_fixes.ipynb
+- Updated OVERHAUL_LOG.md with findings
+
+---
+
 ## OVERHAUL COMPLETE
