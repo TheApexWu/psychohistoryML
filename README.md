@@ -33,7 +33,10 @@ The complexity-duration relationship varies significantly across historical peri
 - **Classical-Medieval** (500 BCE-1500 CE): Weak to moderate effects
 - **Early Modern** (1500+ CE): Minimal relationship
 
-### 3. Realistic Performance Bounds
+### 3. "Infant Mortality" Pattern for Polities
+Weibull survival analysis reveals shape parameter ρ = 0.48, indicating **decreasing hazard over time**. Polities face highest collapse risk in their early decades; those that survive the founding period become increasingly stable. Risk drops ~70% over the first century.
+
+### 4. Realistic Performance Bounds
 AUC ~0.67 (CV mean: 0.66 ± 0.06) represents meaningful but appropriately modest predictive power for complex historical phenomena. Temporal holdout (LOEO AUC = 0.57) shows weak generalization across eras, suggesting era-specific patterns rather than universal laws.
 
 ---
@@ -73,6 +76,8 @@ AUC ~0.67 (CV mean: 0.66 ± 0.06) represents meaningful but appropriately modest
 | 07 | `07_production_deployment.ipynb` | Final model | AUC ~0.67, production ready |
 | 09 | `09_survival_analysis.ipynb` | Cox PH survival | C-index 0.63, HR analysis |
 | 10 | `10_fdr_correction.ipynb` | Statistical correction | 13 → 7 significant findings |
+| 11 | `11_methodology_fixes.ipynb` | Data leakage fix, advanced survival | Weibull ρ=0.48 (infant mortality) |
+| 12 | `12_crisisdb_integration.ipynb` | Scaffold for CrisisDB | Awaiting data access |
 
 ### Production Models
 - **Best Classifier**: Random Forest (CV AUC = 0.66 ± 0.06)
