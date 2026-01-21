@@ -332,3 +332,148 @@ With large n, tiny effects become "significant".
 With small n, large effects may not reach significance.
 
 Always report both.
+
+---
+
+## Mann-Whitney U Test
+
+Non-parametric alternative to the independent samples t-test.
+
+**When to use**:
+- Comparing two groups (violent vs peaceful accession)
+- Data is skewed or ordinal (reign lengths are right-skewed)
+- Don't want to assume normality
+
+**How it works**:
+1. Pool all observations and rank them (1 = smallest)
+2. Sum ranks for each group
+3. Compare: does one group consistently rank higher?
+
+$$U = n_1 n_2 + \frac{n_1(n_1+1)}{2} - R_1$$
+
+Where R₁ = sum of ranks in group 1.
+
+**Intuition**: If violent accessions consistently have shorter reigns, their ranks will be lower. U quantifies this.
+
+**Result (Notebook 04)**:
+- Violent accession: median 8 years
+- Peaceful accession: median 10 years
+- p < 0.0001 (one-tailed)
+
+**Why not t-test?** T-test compares means and assumes normality. With reign lengths:
+- Mean is inflated by long-ruling outliers
+- Distribution has long right tail
+- Median is more representative of "typical" reign
+
+---
+
+## One-Tailed vs Two-Tailed Tests
+
+**Two-tailed**: Testing if groups differ in *either* direction.
+- H₀: μ₁ = μ₂
+- H₁: μ₁ ≠ μ₂
+
+**One-tailed**: Testing a *directional* hypothesis.
+- H₀: μ₁ ≥ μ₂
+- H₁: μ₁ < μ₂
+
+**When to use one-tailed**:
+- You have a specific directional prediction *before* seeing data
+- "Violent accession leads to shorter reigns" is directional
+
+**Calculation**: One-tailed p = two-tailed p / 2
+
+**Caution**: Only use if direction was predicted a priori. Don't peek at data first.
+
+---
+
+## Chi-Square Test of Independence
+
+Tests whether two categorical variables are associated.
+
+**Setup**: 2x2 contingency table
+
+```
+                    Violent Exit    Peaceful Exit
+Violent Entry           264             910
+Peaceful Entry          132            1330
+```
+
+**Question**: Is entry violence associated with exit violence, or are they independent?
+
+**How it works**:
+1. Calculate expected counts if independent: E = (row total × col total) / grand total
+2. Compare observed vs expected: χ² = Σ (O - E)² / E
+3. Larger χ² = bigger deviation from independence
+
+$$\chi^2 = \sum \frac{(O_{ij} - E_{ij})^2}{E_{ij}}$$
+
+**Result (Notebook 04)**:
+- χ² = 91.3, p < 0.0001
+- Violent entry → 22.5% violent exit
+- Peaceful entry → 9.0% violent exit
+- Strong association: violence begets violence
+
+---
+
+## Empirical Survival Curves
+
+Non-parametric estimate of "proportion still in power at time t".
+
+**Calculation**:
+$$\hat{S}(t) = \frac{\text{rulers with reign} \geq t}{\text{total rulers}}$$
+
+**Interpretation**: At year 10, S(10) = 0.45 means 45% of rulers were still in power after 10 years.
+
+**Comparing curves**: If violent accession curve drops faster, violent rulers are removed sooner.
+
+**Result (Notebook 04)**:
+- Violent curve consistently below peaceful curve
+- Gap visible from year 1 onwards
+- Both converge toward 0 by year 50
+
+**Note**: This is simpler than Kaplan-Meier (no censoring adjustment). Works here because we observe full reign lengths for most rulers.
+
+---
+
+## Median vs Mean for Skewed Data
+
+**Mean**: Sum / count. Sensitive to outliers.
+
+**Median**: Middle value when sorted. Robust to outliers.
+
+**Example** (reign lengths):
+- Reigns: [2, 5, 8, 10, 12, 15, 94]
+- Mean: 20.9 years (inflated by 94-year outlier)
+- Median: 10 years (more representative)
+
+**Rule of thumb**:
+- Symmetric data → mean ≈ median, use either
+- Right-skewed → mean > median, prefer median
+- Left-skewed → mean < median, prefer median
+
+**Reign lengths are right-skewed**: Most rulers reign ~10 years, few reign 50+. Median (8 vs 10 years) is more meaningful than mean (12.4 vs 15.6 years).
+
+---
+
+## Contingency Table Notation
+
+Standard 2×2 layout:
+
+```
+                 Outcome=1    Outcome=0    Total
+Exposure=1          a            b         a+b
+Exposure=0          c            d         c+d
+Total             a+c          b+d          n
+```
+
+**Derived measures**:
+- Risk in exposed: a / (a+b)
+- Risk in unexposed: c / (c+d)
+- Risk ratio: [a/(a+b)] / [c/(c+d)]
+- Odds ratio: (a×d) / (b×c)
+
+**Result (Notebook 04)**:
+- Risk of violent exit | violent entry = 264/1174 = 22.5%
+- Risk of violent exit | peaceful entry = 132/1462 = 9.0%
+- Risk ratio = 2.5× (violent entry → 2.5× more likely violent exit)
