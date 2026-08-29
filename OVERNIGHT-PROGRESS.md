@@ -26,8 +26,8 @@ Built while you slept. Every notebook was executed end-to-end (`nbconvert --exec
 
 ## Blocked / queued (not done, and why — no fabrication)
 - **N1 out-of-domain replication (coups/MID):** the Powell-Thyne and CoW servers 403-block scripted download (tried 4 ways incl. browser UA). Needs a manual download or a working mirror. This is the one PRD item that didn't land.
-- **Full complexity re-fit at 864:** the polity list + durations are pulled; the social-complexity variables (population, territory, admin levels) need additional API endpoint calls to rebuild the feature matrix and re-run the RF + temporal holdout. Buildable, just heavier — the natural next notebook.
-- **N3 US structural-demographic** and **N5 spatial (Cliopatria, 307 MB):** untouched, per the PRD.
+- **N3 US structural-demographic:** BLOCKED. Turchin's US Political Violence DB won't pull — peterturchin.com 403s the direct .xlsx, the CrisisDB download URL returns an HTML page not a file, and the `api/crisisdb/us-violences/` endpoint throws a 500 server error (their bug). Needs a manual download or for their endpoint to be fixed.
+- **N1 coups/MID** (servers 403) and **N5 spatial (Cliopatria, 307 MB)**: still open.
 
 ## The story that's emerging
-The project now has a spine: **a well-defined outcome (was a transition violent) supports real, decomposable findings; a vague one ("collapse") supports a coin flip — and here's the honest math for both.** N15 is the standout — it's an actual research contribution, not a re-skin.
+The project now has a spine: **a well-defined outcome (was a transition violent) supports real, decomposable findings; a vague one ("collapse") supports a coin flip — and here's the honest math for both.** N17 is the capstone (our own headline result was a coverage artifact); N15 is a genuine typed decomposition, honestly qualified. Six notebooks, all executed, all committed to `revamp/honest-notebooks`.
