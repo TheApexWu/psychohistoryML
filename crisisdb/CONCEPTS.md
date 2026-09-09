@@ -2,6 +2,10 @@
 
 Quick reference for methods used across PsychohistoryML analysis.
 
+> **Superseded in part.** See the note at the top of `TIMELINE.md` and `notebooks/17` for the
+> complexity classifier. The figures below are kept as the record of what was believed at the time.
+
+
 ---
 
 ## Correlation

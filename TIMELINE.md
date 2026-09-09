@@ -2,6 +2,12 @@
 
 Research evolution from initial exploration to CrisisDB integration.
 
+> **Superseded in part.** The complexity classifier reported below at CV AUC 0.66 +/- 0.06 is
+> shown in `notebooks/17` to be largely a data-coverage artifact: AUC 0.40 on observed data,
+> while missingness alone scores 0.59, because better-documented polities are systematically
+> shorter-lived. The numbers here are kept as the record of what was believed at the time.
+
+
 ---
 
 ## Phase 1: Foundation (Oct 2025)
