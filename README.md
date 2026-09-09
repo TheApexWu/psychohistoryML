@@ -38,7 +38,7 @@ Earlier exploratory notebooks (`notebooks/01–11`, `crisisdb/01–04`) are the 
 
 ## Data & reproduction
 
-All datasets are public and cited inline; large files are gitignored and re-downloadable from the URLs in [`DATA-SOURCES-PLAN.md`](DATA-SOURCES-PLAN.md):
+All datasets are public and cited inline; large files are gitignored and re-downloadable from the URLs in [`data_external/README.md`](data_external/README.md):
 
 - **Seshat Global History Databank** — social-complexity, religion, and the moralizing-gods data (Equinox release + live API, ~864 polities).
 - **CrisisDB** — power transitions, crisis consequences (Navigating Polycrisis), US political violence.
@@ -46,7 +46,7 @@ All datasets are public and cited inline; large files are gitignored and re-down
 
 ```bash
 pip install pandas numpy scikit-learn statsmodels matplotlib
-# then run any notebook top to bottom; data URLs are in DATA-SOURCES-PLAN.md
+# then run any notebook top to bottom; data URLs are in data_external/README.md
 ```
 
 ## Key references

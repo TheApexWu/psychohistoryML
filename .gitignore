@@ -206,8 +206,12 @@ marimo/_static/
 marimo/_lsp/
 __marimo__/
 
-# Overnight revamp: external datasets (redownload via URLs in DATA-SOURCES-PLAN.md)
+# External datasets (redownload via the URLs in data_external/README.md)
 data_external/moralizing-gods-reanalysis/
 data_external/seshat-datasets/
 data_external/coups/
 data_external/*/*.zip
+data_external/us/
+
+# macOS
+.DS_Store
