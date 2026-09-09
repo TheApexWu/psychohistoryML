@@ -1,108 +1,60 @@
 # PsychohistoryML
 
-Exploring patterns in civilizational dynamics using machine learning and 10,000 years of historical data.
+**Computational history of political instability — held to the standard that retracts papers.**
 
-This project analyzes the Seshat Global History Databank and CrisisDB to understand factors affecting civilizational stability.
+This project asks what ten thousand years of historical data can, and cannot, tell us about why polities become unstable. It is deliberately *not* a validation of cliodynamics or structural-demographic theory. It is an attempt to do quantitative history honestly: reproduce the field's central results, test them the way its own critics do, and apply the same test to this project's own findings — including the ones it would rather keep.
 
-## Status
+The organizing result is an asymmetry. When you subject two of this project's headline findings to the missing-data discipline that retracted a *Nature* paper, **one survives and one does not** — and the difference tells you which quantitative history is real and which is an artifact.
 
-Two analysis tracks are complete:
+## The two findings
 
-**Seshat Analysis (Oct-Dec 2025)**
-- 256 polities from Seshat Equinox 2022
-- Random Forest CV AUC: 0.66 plus/minus 0.06
-- Temporal holdout (LOEO) AUC: 0.57
-- Core finding: complexity-duration relationship reverses by era
+**Violence begets violence — and it holds up.** In the CrisisDB power-transition record, a violent transition of power roughly triples the odds the next one is violent (60% vs 22%). Re-run with every *inferred* code stripped out, keeping only directly-observed events, and the effect barely moves (gap 37.7% → 36.1%). The signal rests on observed data, not on how the blanks were filled. → `crisisdb/13`, `crisisdb/15`
 
-**CrisisDB Analysis (Jan 2026)**
-- 3,447 power transitions from CrisisDB
-- Administrative complexity correlates with intra-elite conflict (r=0.36, p<0.001)
-- Violence is self-reinforcing: P(violent | prev violent) = 60% vs 22% after peaceful
-- Violent accession predicts 2 years shorter median reign
+**"Complexity predicts collapse" — and it does not.** The original model here reported that social complexity predicts polity duration at AUC ≈ 0.66. Rebuilt against the live Seshat API (600 of 864 polities merge; 170 have complete complexity data), that number turns out to be largely a **data-coverage artifact**: on observed complexity data the model is anti-predictive (AUC 0.40), while *missingness alone* — how many variables a polity has documented — scores 0.59, because better-documented polities are systematically shorter-lived. Median imputation launders documentation completeness into a fake complexity effect. → `notebooks/17`
 
-Both are exploratory analyses, not confirmatory hypothesis testing.
+The lesson is the one Beheim et al. used to retract Whitehouse et al.'s 2019 *Nature* paper — that the treatment of missing data can determine the conclusion. This project reproduces that retraction (`notebooks/12`) and then turns the same lens on itself.
 
-## Key Findings
+## The notebooks
 
-### Seshat: Era-Stratified Effects
-The complexity-duration relationship varies across historical periods:
-- Ancient (pre-500 BCE): Strong negative correlation (R squared = 0.21)
-- Classical-Medieval (500 BCE to 1500 CE): Weak to moderate effects
-- Early Modern (1500+ CE): Minimal relationship
+Read in order; each is executed end-to-end, and every number is computed in-cell.
 
-### Seshat: Religion Shows Counterintuitive Effects
-Total religious institutionalization associates with shorter duration (HR = 1.58, p < 0.001 after FDR). More religion correlates with shorter polity lifespan.
+| # | Notebook | What it shows |
+|---|---|---|
+| 12 | `notebooks/12_moralizing_gods_reproduction` | Reproduces the retracted *Nature* 2019 "moralizing gods" result: a 42-point swing from a missing-data coding choice. |
+| 13 | `crisisdb/13_missing_data_self_test` | Runs that same test on our own violence-contagion Markov. It survives. |
+| 14 | `crisisdb/14_label_validation` | Cross-checks our violence labels against an independent coder. Honest null (under-powered, n=47). |
+| 15 | `crisisdb/15_channels_of_instability` | Decomposes contagion by type; a robustness section corrects an over-exciting first draft — external shock is the robustly most self-reinforcing channel. |
+| 16 | `notebooks/16_limits_at_scale` | On 864 polities, shows "collapse" is an incoherent target: part geography, part noise. |
+| 17 | `notebooks/17_coverage_artifact` | The complexity→collapse result is a coverage/imputation artifact. The capstone. |
 
-### Seshat: Infant Mortality Pattern
-Weibull survival analysis reveals shape parameter rho = 0.48, indicating decreasing hazard over time. Polities face highest collapse risk in their early decades.
+Earlier exploratory notebooks (`notebooks/01–11`, `crisisdb/01–04`) are the original analysis this revamp reframes; they are kept for provenance.
 
-### CrisisDB: Elite Overproduction Signal
-Each additional administrative level associates with +5.6 percentage points higher intra-elite conflict rate during power transitions. Consistent with Turchin's Structural Demographic Theory.
+## What this project is careful *not* to claim
 
-### CrisisDB: Violence Cascades
-Rulers who seize power violently are 2.7x more likely to be removed violently. The system converges to 36% violent transitions at equilibrium.
+- It does not predict the future, or any specific society's collapse.
+- It does not validate structural-demographic theory. Where it engages Turchin's claims (e.g. elite overproduction), it tests them and reports where they hold and where they don't.
+- Its strongest positive result (violence contagion) is descriptive, not causal.
+- Every dataset here is expert-coded historical data with real subjectivity and coverage gaps (Slingerland et al. 2020, *Coding culture*); the analyses are built to expose those limits, not paper over them.
 
-## Data Sources
+## Data & reproduction
 
-**Seshat Global History Databank** (Equinox 2022)
-- 256 polities after filtering
-- Timeline: 3000 BCE to 1900 CE
-- 16 features across complexity, warfare, and religion
+All datasets are public and cited inline; large files are gitignored and re-downloadable from the URLs in [`data_external/README.md`](data_external/README.md):
 
-**CrisisDB Power Transitions**
-- 3,447 transitions from 264 polities
-- Merged with Seshat complexity metrics
-- Subset with 5+ transitions per polity: 87 polities
-
-## Notebooks
-
-### Seshat Analysis
-| Notebook | Purpose |
-|----------|---------|
-| 04_equinox_replication | Era clustering discovery |
-| 05_warfare_integration | Warfare mechanism |
-| 06_religion_integration | Religion mechanism |
-| 07_production_deployment | Final model |
-| 09_survival_analysis | Cox PH survival |
-| 10_fdr_correction | Statistical correction |
-| 11_methodology_fixes | Data leakage fix, Weibull |
-
-### CrisisDB Analysis
-| Notebook | Purpose |
-|----------|---------|
-| 01_explore | Initial data exploration |
-| 02_elite_overproduction | Complexity-conflict correlation |
-| 03_violence_contagion | Markov chain analysis |
-| 04_ruler_tenure | Reign length by accession type |
-
-## Limitations
-
-- Sample sizes are small (256 and 87 polities for key analyses)
-- Selection bias toward well-documented societies
-- Correlation does not imply causation
-- Temporal holdout shows weak era generalization (AUC 0.57)
-- Polity duration is an imperfect proxy for stability
-
-## Getting Started
+- **Seshat Global History Databank** — social-complexity, religion, and the moralizing-gods data (Equinox release + live API, ~864 polities).
+- **CrisisDB** — power transitions, crisis consequences (Navigating Polycrisis), US political violence.
+- **Beheim et al. 2021 replication archive** — the moralizing-gods critique, reproduced in `notebooks/12`.
 
 ```bash
-git clone https://github.com/TheApexWu/psychohistoryML.git
-cd psychohistoryML
-pip install -r requirements.txt
-jupyter notebook notebooks/
+pip install pandas numpy scikit-learn statsmodels matplotlib
+# then run any notebook top to bottom; data URLs are in data_external/README.md
 ```
 
-## Web Interface
+## Key references
 
-Interactive explorer: https://amadeuswoo.com
+- Whitehouse, François, Savage, Turchin et al. 2019. *Complex societies precede moralizing gods.* Nature 568:226 (**retracted 2021**).
+- Beheim et al. 2021. *Treatment of missing data determined conclusions regarding moralizing gods.* Nature 595:E29.
+- Turchin, Currie, Whitehouse et al. 2018. *A single dimension of complexity.* PNAS 115(2):E144.
+- Turchin 2016. *Ages of Discord: A Structural-Demographic Analysis of American History.*
+- Hoyer, Reddish, François, Turchin et al. 2024. *All Crises are Unhappy in Their Own Way.* Social Science History.
 
-- Seshat analysis: /discover, /research
-- CrisisDB analysis: /crisisdb
-
-## Acknowledgments
-
-Data from the Seshat Global History Databank and CrisisDB, maintained by the Complexity Science Hub Vienna. Theory builds on Peter Turchin's cliodynamics and Structural Demographic Theory.
-
-## Author
-
-@theapexwu
+*A well-defined question — was a transition violent — supports real findings. A vague one — did a society collapse — supports artifacts. This project is the honest math for both.*
